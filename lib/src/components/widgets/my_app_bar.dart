@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../l10n/app_localizations.dart';
 import '../responsive/extension.dart';
 
 class MyAppBar extends StatelessWidget {
@@ -32,8 +33,8 @@ class AppMenus extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Row(children:[
-      Text('Home'),
+    return  Row(children:[
+      Text(AppLocalizations.of(context)!.home),
       Text('About'),
       Text('Contact'),
       Text('Services'),
