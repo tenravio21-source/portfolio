@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/src/components/widgets/app_bar_drawer_icon.dart';
 
+import '../../constants/app_menu_list.dart';
 import '../responsive/extension.dart';
 import '../style/app_size.dart' show Insets;
 
@@ -48,12 +49,9 @@ class AppMenus extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      children: [
-        Text(context.texts.home),
-        Text(context.texts.course),
-        Text(context.texts.blog),
-        Text(context.texts.aboutMe),
-      ],
+      children: AppMenuList.getItems(
+        context,
+      ).map((menu) => Text(menu.title)).toList(),
     );
   }
 }
