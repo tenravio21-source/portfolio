@@ -22,7 +22,7 @@ class MyAppBar extends StatelessWidget {
           children: [
             AppLogo(),
             Spacer(),
-            if (context.isDesktop) AppMenus(),
+            if (context.isDesktop) LargeMenu(),
             Spacer(),
             LanguageToggle(),
             ThemeToggle(),
@@ -43,8 +43,8 @@ class AppLogo extends StatelessWidget {
   }
 }
 
-class AppMenus extends StatelessWidget {
-  const AppMenus({super.key});
+class LargeMenu extends StatelessWidget {
+  const LargeMenu({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -53,6 +53,24 @@ class AppMenus extends StatelessWidget {
         context,
       ).map((menu) => Text(menu.title)).toList(),
     );
+  }
+}
+
+class LargeAppBarMenuItem extends StatelessWidget {
+
+  final String text;
+  final bool isSelected;
+  final VoidCallback onTap;
+
+  const LargeAppBarMenuItem({super.key,
+    required this.text,
+    required this.isSelected,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Text('Portfolio', style: context.textStyle.titleLgBold);
   }
 }
 
