@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:portfolio/src/components/style/app_size.dart';
 
+import '../../../l10n/app_localizations.dart'
+    show AppLocalizations, lookupAppLocalizations;
 import '../style/app_text_style.dart';
 
 enum FormFactorType { mobile, tablet, desktop }
@@ -28,4 +31,17 @@ extension FormFactorExtension on BuildContext {
         return LargeTextStyle();
     }
   }
+
+  AppSize get insets {
+    switch (formFactor) {
+      case FormFactorType.mobile:
+        return SmallInsets();
+      case FormFactorType.tablet:
+      case FormFactorType.desktop:
+        return LargeInsets();
+    }
+  }
+
+  AppLocalizations get texts =>
+      AppLocalizations.of(this) ?? lookupAppLocalizations(const Locale('en'));
 }

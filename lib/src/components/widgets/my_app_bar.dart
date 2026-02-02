@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../l10n/app_localizations.dart';
 import '../responsive/extension.dart';
 
 class MyAppBar extends StatelessWidget {
@@ -8,14 +7,18 @@ class MyAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(children: [
-      AppLogo(),
-      Spacer(),
-      AppMenus(),
-      Spacer(),
-      LanguageToggle(),
-      ThemeToggle(),
-    ]);
+    return Container(
+    color: Theme.of(context).appBarTheme.backgroundColor,
+    padding: EdgeInsets.symmetric(horizontal: context.insets.padding),
+      child: Row(children: [
+        AppLogo(),
+        Spacer(),
+        AppMenus(),
+        Spacer(),
+        LanguageToggle(),
+        ThemeToggle(),
+      ]),
+    );
   }
 }
 
@@ -34,10 +37,10 @@ class AppMenus extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  Row(children:[
-      Text(AppLocalizations.of(context)!.home),
-      Text('About'),
-      Text('Contact'),
-      Text('Services'),
+      Text(context.texts.home),
+      Text(context.texts.course),
+      Text(context.texts.blog),
+      Text(context.texts.aboutMe),
     ]);
   }
 }

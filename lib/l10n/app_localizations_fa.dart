@@ -10,4 +10,13 @@ class AppLocalizationsFa extends AppLocalizations {
 
   @override
   String get home => 'خانه';
+
+  @override
+  String get course => 'دوره';
+
+  @override
+  String get blog => 'بلاگ';
+
+  @override
+  String get aboutMe => 'درباره من';
 }
