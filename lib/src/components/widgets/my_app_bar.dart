@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../responsive/extension.dart';
+import '../style/app_size.dart' show Insets;
 
 class MyAppBar extends StatelessWidget {
   const MyAppBar({super.key});
@@ -8,16 +9,23 @@ class MyAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-    color: Theme.of(context).appBarTheme.backgroundColor,
+    alignment: Alignment.center,
+    // color: Theme.of(context).appBarTheme.backgroundColor,
+    height: context.insets.appBarHeight,
+    color: Colors.red,
     padding: EdgeInsets.symmetric(horizontal: context.insets.padding),
-      child: Row(children: [
-        AppLogo(),
-        Spacer(),
-        AppMenus(),
-        Spacer(),
-        LanguageToggle(),
-        ThemeToggle(),
-      ]),
+      child: ConstrainedBox(
+      constraints: BoxConstraints(maxWidth: Insets.maxWidth),
+        child: Row(children: [
+          AppLogo(),
+          Spacer(),
+          if(context.isDesktop) AppMenus(),
+          Spacer(),
+          LanguageToggle(),
+          ThemeToggle(),
+          if(context.isMobile) Icon(Icons.menu),
+        ]),
+      ),
     );
   }
 }
