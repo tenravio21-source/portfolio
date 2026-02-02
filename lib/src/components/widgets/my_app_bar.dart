@@ -83,7 +83,7 @@ class LanguageToggle extends StatelessWidget {
       onSelected: (value) {},
       itemBuilder: (context) => [
         const PopupMenuItem<String>(value: 'en', child: Text('English')),
-        const PopupMenuItem<String>(value: 'es', child: Text('Español')),
+        const PopupMenuItem<String>(value: 'fa', child: Text('Persian')),
       ],
     );
   }
