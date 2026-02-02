@@ -12,6 +12,8 @@ extension FormFactorExtension on BuildContext {
   double get screenWidth => mediaQuery.size.width;
   double get screenHeight => mediaQuery.size.height;
 
+  ThemeData get theme => Theme.of(this);
+
   FormFactorType get formFactor {
     if (screenWidth < 600) return FormFactorType.mobile;
     if (screenWidth < 900) return FormFactorType.tablet;

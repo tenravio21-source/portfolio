@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:portfolio/src/components/widgets/app_bar_drawer_icon.dart';
 
 import '../responsive/extension.dart';
 import '../style/app_size.dart' show Insets;
@@ -8,23 +9,25 @@ class MyAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-    alignment: Alignment.center,
-    // color: Theme.of(context).appBarTheme.backgroundColor,
-    height: context.insets.appBarHeight,
-    color: Colors.red,
-    padding: EdgeInsets.symmetric(horizontal: context.insets.padding),
+    return AnimatedContainer(
+      duration: Duration(milliseconds: 300),
+      alignment: Alignment.center,
+      color: context.theme.appBarTheme.backgroundColor,
+      height: context.insets.appBarHeight,
+      padding: EdgeInsets.symmetric(horizontal: context.insets.padding),
       child: ConstrainedBox(
-      constraints: BoxConstraints(maxWidth: Insets.maxWidth),
-        child: Row(children: [
-          AppLogo(),
-          Spacer(),
-          if(context.isDesktop) AppMenus(),
-          Spacer(),
-          LanguageToggle(),
-          ThemeToggle(),
-          if(context.isMobile) Icon(Icons.menu),
-        ]),
+        constraints: BoxConstraints(maxWidth: Insets.maxWidth),
+        child: Row(
+          children: [
+            AppLogo(),
+            Spacer(),
+            if (context.isDesktop) AppMenus(),
+            Spacer(),
+            LanguageToggle(),
+            ThemeToggle(),
+            if (!context.isDesktop) AppBarDrawerIcon(),
+          ],
+        ),
       ),
     );
   }
@@ -44,12 +47,14 @@ class AppMenus extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Row(children:[
-      Text(context.texts.home),
-      Text(context.texts.course),
-      Text(context.texts.blog),
-      Text(context.texts.aboutMe),
-    ]);
+    return Row(
+      children: [
+        Text(context.texts.home),
+        Text(context.texts.course),
+        Text(context.texts.blog),
+        Text(context.texts.aboutMe),
+      ],
+    );
   }
 }
 
@@ -61,14 +66,8 @@ class LanguageToggle extends StatelessWidget {
     return PopupMenuButton<String>(
       onSelected: (value) {},
       itemBuilder: (context) => [
-        const PopupMenuItem<String>(
-          value: 'en',
-          child: Text('English'),
-        ),
-        const PopupMenuItem<String>(
-          value: 'es',
-          child: Text('Español'),
-        ),
+        const PopupMenuItem<String>(value: 'en', child: Text('English')),
+        const PopupMenuItem<String>(value: 'es', child: Text('Español')),
       ],
     );
   }
@@ -79,9 +78,6 @@ class ThemeToggle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Switch(
-      value: true,
-      onChanged: (value) {},
-    );
+    return Switch(value: true, onChanged: (value) {});
   }
 }
