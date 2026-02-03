@@ -1,5 +1,7 @@
 class Insets{
 	static const double maxWidth = 1280.0;
+	static const double xs = 4.0;
+	static const double md = 16.0;
 }
 
 abstract class AppSize {

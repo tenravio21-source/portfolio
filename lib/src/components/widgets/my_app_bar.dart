@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:portfolio/src/components/style/app_text_style.dart';
 import 'package:portfolio/src/components/widgets/app_bar_drawer_icon.dart';
 
 import '../../constants/app_menu_list.dart';
 import '../responsive/extension.dart';
 import '../style/app_size.dart' show Insets;
+import 'language_switch.dart';
 
 class MyAppBar extends StatelessWidget {
   const MyAppBar({super.key});
@@ -24,7 +26,7 @@ class MyAppBar extends StatelessWidget {
             Spacer(),
             if (context.isDesktop) LargeMenu(),
             Spacer(),
-            LanguageToggle(),
+            LanguageSwitch(),
             ThemeToggle(),
             if (!context.isDesktop) AppBarDrawerIcon(),
           ],
@@ -39,7 +41,7 @@ class AppLogo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text('Portfolio', style: context.textStyle.titleLgBold);
+    return Text('Portfolio', style: context.textStyle.titleSmBold);
   }
 }
 
@@ -49,20 +51,26 @@ class LargeMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      children: AppMenuList.getItems(
-        context,
-      ).map((menu) => Text(menu.title)).toList(),
+      children: AppMenuList.getItems(context)
+          .map(
+            (menu) => LargeAppBarMenuItem(
+              text: menu.title,
+              onTap: () => {},
+              isSelected: false,
+            ),
+          )
+          .toList(),
     );
   }
 }
 
 class LargeAppBarMenuItem extends StatelessWidget {
-
   final String text;
   final bool isSelected;
   final VoidCallback onTap;
 
-  const LargeAppBarMenuItem({super.key,
+  const LargeAppBarMenuItem({
+    super.key,
     required this.text,
     required this.isSelected,
     required this.onTap,
@@ -70,30 +78,41 @@ class LargeAppBarMenuItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text('Portfolio', style: context.textStyle.titleLgBold);
-  }
-}
-
-class LanguageToggle extends StatelessWidget {
-  const LanguageToggle({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return PopupMenuButton<String>(
-      onSelected: (value) {},
-      itemBuilder: (context) => [
-        const PopupMenuItem<String>(value: 'en', child: Text('English')),
-        const PopupMenuItem<String>(value: 'fa', child: Text('Persian')),
-      ],
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        padding: EdgeInsets.symmetric(
+          horizontal: Insets.md,
+          vertical: Insets.xs,
+        ),
+        child: Text(text, style: SmallTextStyle().bodyLgMedium),
+      ),
     );
   }
 }
 
-class ThemeToggle extends StatelessWidget {
+
+
+class ThemeToggle extends StatefulWidget {
   const ThemeToggle({super.key});
 
   @override
+  State<ThemeToggle> createState() => _ThemeToggleState();
+}
+
+class _ThemeToggleState extends State<ThemeToggle> {
+  bool isChecked = false;
+
+  @override
   Widget build(BuildContext context) {
-    return Switch(value: true, onChanged: (value) {});
+    return Switch(
+      activeThumbColor: Theme.of(context).colorScheme.primary,
+      value: isChecked,
+      onChanged: (value) {
+        setState(() {
+          isChecked = value;
+        });
+      },
+    );
   }
 }
