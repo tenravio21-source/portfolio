@@ -12,7 +12,7 @@ class AppLocaleController extends AsyncNotifier<String> {
   }
 
   void changeLocale(String locale) async {
-    AppSharedPreferences.setLocale(locale);
-    state = AsyncData(locale);
+    await AppSharedPreferences.setLocale(locale);
+    update((state) => locale);
   }
 }
