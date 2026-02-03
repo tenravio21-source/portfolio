@@ -1,4 +1,6 @@
 class AppIcon {
+  AppIcon._();
+
   static const String _icons = 'assets/icons/';
 
   static const String us = '${_icons}us.svg';
