@@ -11,7 +11,7 @@ class AppLocaleController extends AsyncNotifier<String> {
     return savedLocale ?? 'en';
   }
 
-  void changeLocale(String locale) async {
+  Future<void> changeLocale(String locale) async {
     await AppSharedPreferences.setLocale(locale);
     update((state) => locale);
   }
